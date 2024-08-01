@@ -1,0 +1,15 @@
+/target
+.direnv/
+**/dist/
+*.wasm
+
+*.log
+
+**/*.png
+!**/assets/**/*
+
+**/*rustc-ice*
+
+.bacon-locations
+
+perf*
