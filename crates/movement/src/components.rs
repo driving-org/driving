@@ -31,7 +31,7 @@ impl Velocity {
 }
 
 /// Bevy [`Component`] for linear and rotational acceleration
-#[derive(Component, Debug)]
+#[derive(Component, Debug, Clone)]
 pub struct Acceleration {
     pub linear:  Vec3,
     pub angular: Vec3,
@@ -43,6 +43,20 @@ impl Default for Acceleration {
             linear:  Vec3::ZERO,
             angular: Vec3::ZERO,
         }
+    }
+}
+
+impl Acceleration {
+    /// Make a zero acceleration
+    pub const ZERO: Self = Self {
+        linear:  Vec3::ZERO,
+        angular: Vec3::ZERO,
+    };
+
+    /// Normalize the linear acceleration
+    pub fn normalize(&mut self) -> &mut Self {
+        self.linear = self.linear.normalize_or_zero();
+        self
     }
 }
 
