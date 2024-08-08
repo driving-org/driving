@@ -1,0 +1,18 @@
+[package]
+name                   = "drive"
+edition                = "2021"
+version.workspace      = true
+repository.workspace   = true
+authors.workspace      = true
+rust-version.workspace = true
+license.workspace      = true
+
+[dependencies]
+car           = { path = "../car" }
+environment   = { path = "../environment" }
+follow_camera = { path = "../follow_camera" }
+# movement       = { path = "../movement" }
+bevy.workspace = true
+
+[lints]
+workspace = true

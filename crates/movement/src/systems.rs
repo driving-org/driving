@@ -33,21 +33,27 @@ pub fn handle_acceleration(
 /// Bevy [`System`] to apply friction to velocity
 pub fn apply_friction(mut query: Query<(&mut Velocity, &Acceleration)>, time: Res<Time<Virtual>>) {
     for (mut velocity, acceleration) in query.iter_mut() {
-        info!(
-            "Applying friction to velocity {:?} with acceleration {:?}",
-            velocity, acceleration
-        );
-        let friction_coefficient_linear = 1.0;
-        let friction_coefficient_angular = 1.0;
+        // info!(
+        //     "Applying friction to velocity {:?} with acceleration {:?}",
+        //     velocity, acceleration
+        // );
+        let friction_coefficient_linear = 0.1f32;
+        let friction_coefficient_angular = 0.1f32;
+        let friction_minimum = 0.01f32;
         let previous_velocity = velocity.clone();
+
         velocity.linear *= 1.0
-            - previous_velocity.linear.length()
-                * time.delta_seconds()
-                * friction_coefficient_linear;
+            - friction_minimum.max(
+                previous_velocity.linear.length()
+                    * time.delta_seconds()
+                    * friction_coefficient_linear,
+            );
         velocity.angular *= 1.0
-            - previous_velocity.angular.length()
-                * time.delta_seconds()
-                * friction_coefficient_angular;
+            - friction_minimum.max(
+                previous_velocity.angular.length()
+                    * time.delta_seconds()
+                    * friction_coefficient_angular,
+            );
 
         // if velocity.linear.length() < 0.01 {
         //     velocity.linear = Vec3::ZERO;

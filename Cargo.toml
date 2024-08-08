@@ -4,8 +4,8 @@ cargo-features = [
 
 [workspace]
 resolver = "2" # Important! wgpu/bevy needs this!
-members = [
-    "crates/core",
+members = [ "crates/car",
+    "crates/drive", "crates/environment", "crates/follow_camera", "crates/movement",
 ]
 
 [workspace.package]
