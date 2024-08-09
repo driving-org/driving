@@ -9,16 +9,31 @@ pub fn spawn_car(
     mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
     info!("Spawning car");
-    commands.spawn((
-        PbrBundle {
-            mesh: meshes.add(Cuboid::new(0.5, 0.25, 1.0)),
-            material: materials.add(Color::linear_rgb(0.0, 0.0, 1.0)),
-            transform: Transform::from_translation(Vec3::new(0.0, 0.125, 0.0)),
-            ..Default::default()
-        },
-        Car,
-        movement::components::MovementBundle::default(),
-    ));
+
+    // Spawn a car
+    let car = commands
+        .spawn((
+            PbrBundle {
+                mesh: meshes.add(Cuboid::new(0.5, 0.25, 1.0)),
+                material: materials.add(Color::linear_rgb(0.0, 0.0, 1.0)),
+                transform: Transform::from_translation(Vec3::new(0.0, 0.125, 0.0)),
+                ..Default::default()
+            },
+            Car,
+            movement::components::MovementBundle::default(),
+        ))
+        .id();
+
+    // // Spawn a camera
+    // let camera = commands
+    //     .spawn(Camera3dBundle {
+    //         // transform: Transform::from_xyz(0.0, 10.0,
+    // 0.0).looking_at(Vec3::ZERO, -Vec3::Z),         ..default()
+    //     })
+    //     .id();
+
+    // // Attach the camera to the car
+    // commands.entity(car).add_child(camera);
 }
 
 /// Bevy [`System`] to handle car input.

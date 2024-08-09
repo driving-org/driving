@@ -10,8 +10,7 @@ fn main() {
     app.add_plugins((
         car::CarPlugin,
         environment::EnvironmentPlugin,
-        // follow_camera::FollowCameraPlugin,
-        // movement::MovementPlugin,
+        follow_camera::FollowCameraPlugin,
     ));
 
     app.run();
